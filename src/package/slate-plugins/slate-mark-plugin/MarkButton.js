@@ -1,0 +1,40 @@
+import React, { Node } from 'react'
+import styled from 'styled-components'
+
+import { markStrategy, hasMark } from './MarkUtils'
+
+const Button = styled.span`
+  display: inline-block;
+  + * {
+    margin-left: 15px;
+  }
+  color: #ccc;
+  cursor: pointer;
+`
+
+type Props = {
+  children: Node,
+}
+
+const MaterialIcon = ({ children }: Props) => (
+  <span className='material-icons'>{children}</span>
+)
+
+const Icon = styled(MaterialIcon)`
+  font-size: 18px;
+  vertical-align: text-bottom;
+`
+
+const MarkButton = ({ type, icon, activeMarks, onChange, change }) => (
+  <Button
+    onMouseDown={event => {
+      event.preventDefault()
+      onChange(markStrategy(type, change))
+    }}
+    isActive={hasMark(type, activeMarks)}
+  >
+    <Icon>{icon}</Icon>
+  </Button>
+)
+
+export default MarkButton
