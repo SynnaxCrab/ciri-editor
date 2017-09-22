@@ -1,5 +1,3 @@
-// @flow
-
 import MarkNode from './MarkNode'
 
 const MarkSchema = (type) => ({

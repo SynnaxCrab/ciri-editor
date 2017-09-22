@@ -1,10 +1,4 @@
-// @flow
-
-import React, { Node } from 'react'
-
-type Props = {
-  children: Node,
-}
+import React from 'react'
 
 const MarkNodes = {
   bold: ({ children }: Props) => <strong>{children}</strong>,
@@ -13,6 +7,6 @@ const MarkNodes = {
   underlined: ({ children }: Props) => <u>{children}</u>,
 }
 
-const MarkNode = (type) => MarkNodes[type]
+const MarkNode = type => MarkNodes[type]
 
 export default MarkNode

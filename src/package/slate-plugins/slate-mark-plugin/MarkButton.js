@@ -1,4 +1,4 @@
-import React, { Node } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import { markStrategy, hasMark } from './MarkUtils'
@@ -12,10 +12,6 @@ const Button = styled.span`
   cursor: pointer;
 `
 
-type Props = {
-  children: Node,
-}
-
 const MaterialIcon = ({ children }: Props) => (
   <span className='material-icons'>{children}</span>
 )
@@ -27,7 +23,7 @@ const Icon = styled(MaterialIcon)`
 
 const MarkButton = ({ type, icon, activeMarks, onChange, change }) => (
   <Button
-    onMouseDown={event => {
+    onClick={event => {
       event.preventDefault()
       onChange(markStrategy(type, change))
     }}
