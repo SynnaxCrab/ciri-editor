@@ -2,7 +2,8 @@ import React from 'react'
 import { State } from 'slate'
 import { Editor } from 'slate-react'
 
-import { MarkPlugin, MarkButton } from './plugins/slate-mark-plugin'
+import { MarkPlugin, MarkButton } from './slate-plugins/slate-mark-plugin'
+import { AutoMarkdownPlugin } from './slate-plugins/slate-auto-markdown-plugin'
 
 const initialState = State.fromJSON({
   document: {
@@ -27,6 +28,7 @@ const initialState = State.fromJSON({
 
 const plugins = [
   MarkPlugin({ key: 'b', type: 'bold' }),
+  AutoMarkdownPlugin(),
 ]
 
 class CiriEditor extends React.Component {
