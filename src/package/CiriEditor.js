@@ -47,33 +47,32 @@ class CiriEditor extends React.Component {
     }
   }
 
-  componentDidMount = () => {
-    updateMenuPosition(this.menu, this.state.editorState)
-  }
-
-  componentDidUpdate = () => {
-    updateMenuPosition(this.menu, this.state.editorState)
-  }
+  componentDidUpdate = () => updateMenuPosition(this.menu, this.state.editorState)
 
   onChange = ({ state }) => this.setState({ editorState: state })
 
   render() {
+    const editorState = this.state.editorState
     return (
       <div>
         <HoveringMenu
+          isOpened={menuIsOpened(editorState)}
           menuRef={el => this.menu = el}
-          activeMarks={this.state.editorState.activeMarks}
+          activeMarks={editorState.activeMarks}
           onChange={this.onChange}
-          change={this.state.editorState.change()}
+          change={editorState.change()}
         />
         <Editor
           plugins={plugins}
-          state={this.state.editorState}
+          state={editorState}
           onChange={this.onChange}
         />
       </div>
     )
   }
 }
+
+// helpers, will be extract out later
+const menuIsOpened = editorState => editorState.isExpanded && editorState.isFocused
 
 export default CiriEditor

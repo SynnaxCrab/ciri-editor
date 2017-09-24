@@ -8,12 +8,11 @@ const Menu = styled.div`
   padding: 8px 7px 6px;
   position: absolute;
   z-index: 1;
-  top: -10000px;
-  left: -10000px;
   margin-top: -6px;
   background-color: #222;
   border-radius: 4px;
-  transition: opacity .75s;
+  opacity: 0.5;
+  transition: opacity 0.5s;
 `
 export const updateMenuPosition = (menu, editorState) => {
   if (!menu) return
@@ -32,7 +31,7 @@ export const updateMenuPosition = (menu, editorState) => {
   menu.style.left = `${rect.left + window.scrollX - menu.offsetWidth / 2 + rect.width / 2}px`
 }
 
-const HoveringMenu = ({ menuRef, activeMarks, onOpen, onChange, change }) => {
+const HoveringMenu = ({ isOpened, menuRef, activeMarks, onOpen, onChange, change }) => {
   const menus = [
     { icon: 'format_bold', type: 'bold' },
     { icon: 'format_italic', type: 'italic' },
@@ -41,7 +40,7 @@ const HoveringMenu = ({ menuRef, activeMarks, onOpen, onChange, change }) => {
   ]
 
   return (
-    <Portal isOpened>
+    <Portal isOpened={isOpened}>
       <Menu innerRef={menuRef}>
         {menus.map(menu => (
           <MarkButton
