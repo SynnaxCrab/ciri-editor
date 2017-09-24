@@ -23,7 +23,7 @@ const Icon = styled(MaterialIcon)`
 
 const MarkButton = ({ type, icon, activeMarks, onChange, change }) => (
   <Button
-    onClick={event => {
+    onMouseDown={event => {
       event.preventDefault()
       onChange(markStrategy(type, change))
     }}

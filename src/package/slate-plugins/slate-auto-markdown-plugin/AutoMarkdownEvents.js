@@ -12,8 +12,6 @@ export const onSpace = (event, change) => {
   if (type === 'list-item' && startBlock.type === 'list-item') return
   event.preventDefault()
 
-  console.log("KKKKKKKKKKKKKK")
-  console.log(type)
   change.setBlock(type)
 
   if (type === 'list-item') {
