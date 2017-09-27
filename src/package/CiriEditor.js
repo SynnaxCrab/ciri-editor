@@ -4,7 +4,7 @@ import { Editor } from 'slate-react'
 
 import { MarkPlugin } from './slate-plugins/slate-mark-plugin'
 import { AutoMarkdownPlugin } from './slate-plugins/slate-auto-markdown-plugin'
-import HoveringMenu from './HoveringMenu'
+import HoveringMenu, { updateMenuPosition } from './HoveringMenu'
 
 const initialState = State.fromJSON({
   document: {
@@ -47,6 +47,8 @@ class CiriEditor extends React.Component {
     }
   }
 
+  componentDidUpdate = () => updateMenuPosition(this.menu, this.state.editorState)
+
   onChange = ({ state }) => this.setState({ editorState: state })
 
   render() {
@@ -54,6 +56,7 @@ class CiriEditor extends React.Component {
     return (
       <div>
         {menuIsOpened(editorState) ? <HoveringMenu
+          menuRef={el => this.menu = el}
           onChange={this.onChange}
           editorState={editorState}
         /> : null}

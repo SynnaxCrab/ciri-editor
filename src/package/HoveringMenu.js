@@ -17,7 +17,7 @@ const Menu = styled.div`
   opacity: 0.5;
   transition: opacity 0.5s;
 `
-const updateMenuPosition = (menu, editorState) => {
+export const updateMenuPosition = (menu, editorState) => {
   if (!menu) return
 
   if (editorState.isBlurred || editorState.isEmpty) {
@@ -34,42 +34,31 @@ const updateMenuPosition = (menu, editorState) => {
   menu.style.left = `${rect.left + window.scrollX - menu.offsetWidth / 2 + rect.width / 2}px`
 }
 
-class HoveringMenu extends React.Component {
-  componentDidMount() {
-    updateMenuPosition(this.el, this.props.editorState)
-  }
+const HoveringMenu = ({ menuRef, onChange, editorState }) => {
+  const menus = [
+    { icon: 'format_bold', type: 'bold' },
+    { icon: 'format_italic', type: 'italic' },
+    { icon: 'format_underlined', type: 'underlined' },
+    { icon: 'code', type: 'code' },
+  ]
 
-  render() {
-    const { onChange, editorState } = this.props
-    const menus = [
-      { icon: 'format_bold', type: 'bold' },
-      { icon: 'format_italic', type: 'italic' },
-      { icon: 'format_underlined', type: 'underlined' },
-      { icon: 'code', type: 'code' },
-    ]
-
-    const selection = window.getSelection()
-    const range = selection.getRangeAt(0)
-    const rect = range.getBoundingClientRect()
-
-    return (
-      ReactDOM.createPortal(
-        <Menu innerRef={el => this.el = el}>
-          {menus.map(menu => (
-            <MarkButton
-              key={menu.type}
-              icon={menu.icon}
-              type={menu.type}
-              activeMarks={editorState.activeMarks}
-              onChange={onChange}
-              change={editorState.change()}
-            />),
-          )}
-        </Menu>,
-        modalRoot
-      )
+  return (
+    ReactDOM.createPortal(
+      <Menu innerRef={menuRef}>
+        {menus.map(menu => (
+          <MarkButton
+            key={menu.type}
+            icon={menu.icon}
+            type={menu.type}
+            activeMarks={editorState.activeMarks}
+            onChange={onChange}
+            change={editorState.change()}
+          />),
+        )}
+      </Menu>,
+      modalRoot
     )
-  }
+  )
 }
 
 export default HoveringMenu
