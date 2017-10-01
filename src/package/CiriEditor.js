@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { State } from 'slate'
 import { Editor } from 'slate-react'
 
@@ -39,7 +39,7 @@ const plugins = [
   AutoMarkdownPlugin(),
 ]
 
-class CiriEditor extends React.Component {
+class CiriEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {

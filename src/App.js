@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
 
 import CiriEditor from './package/CiriEditor'
 
@@ -14,7 +14,7 @@ class App extends Component {
         </div>
         <CiriEditor />
       </div>
-    );
+    )
   }
 }
 
