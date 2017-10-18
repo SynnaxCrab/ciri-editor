@@ -15,7 +15,7 @@ const initialState = State.fromJSON({
         nodes: [
           {
             kind: 'text',
-            ranges: [
+            leaves: [
               {
                 text: 'A line of text in a paragraph.',
               },
