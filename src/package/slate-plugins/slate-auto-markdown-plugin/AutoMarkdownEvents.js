@@ -1,10 +1,10 @@
 import { getType } from './AutoMarkdownUtils'
 
 export const onSpace = (event, change) => {
-  const { state } = change
-  if (state.isExpanded) return
+  const { value } = change
+  if (value.isExpanded) return
 
-  const { startBlock, startOffset } = state
+  const { startBlock, startOffset } = value
   const chars = startBlock.text.slice(0, startOffset).replace(/\s*/g, '')
   const type = getType(chars)
 
@@ -26,11 +26,11 @@ export const onSpace = (event, change) => {
 }
 
 export const onBackspace = (event, change) => {
-  const { state } = change
-  if (state.isExpanded) return
-  if (state.startOffset !== 0) return
+  const { value } = change
+  if (value.isExpanded) return
+  if (value.startOffset !== 0) return
 
-  const { startBlock } = state
+  const { startBlock } = value
   if (startBlock.type === 'paragraph') return
 
   event.preventDefault()
@@ -44,10 +44,10 @@ export const onBackspace = (event, change) => {
 }
 
 export const onEnter = (event, change) => {
-  const { state } = change
-  if (state.isExpanded) return
+  const { value } = change
+  if (value.isExpanded) return
 
-  const { startBlock, startOffset, endOffset } = state
+  const { startBlock, startOffset, endOffset } = value
   if (startOffset === 0 && startBlock.text.length === 0) {
     return onBackspace(event, change)
   }

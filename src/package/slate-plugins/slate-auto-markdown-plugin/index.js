@@ -1,5 +1,6 @@
 import AutoMarkdownSchema from './AutoMarkdownSchema'
 import { onSpace, onEnter, onBackspace } from './AutoMarkdownEvents'
+import AutoMarkDownRenderNode from './AutoMarkdownRenderNode'
 
 const AutoMarkdownPlugin = () => ({
   schema: AutoMarkdownSchema,
@@ -11,6 +12,7 @@ const AutoMarkdownPlugin = () => ({
       default: return false
     }
   },
+  renderNode: AutoMarkDownRenderNode,
 })
 
 export { AutoMarkdownPlugin, AutoMarkdownSchema }

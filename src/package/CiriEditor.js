@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { State } from 'slate'
+import { Value } from 'slate'
 import { Editor } from 'slate-react'
 
 import { MarkPlugin } from './slate-plugins/slate-mark-plugin'
 import { AutoMarkdownPlugin } from './slate-plugins/slate-auto-markdown-plugin'
 import HoveringMenu, { updateMenuPosition } from './HoveringMenu'
 
-const initialState = State.fromJSON({
+const initialValue = Value.fromJSON({
   document: {
     nodes: [
       {
@@ -35,7 +35,7 @@ const markPlugins = [
 ].map(x => MarkPlugin(x))
 
 const plugins = [
-  ...markPlugins,
+  //...markPlugins,
   AutoMarkdownPlugin(),
 ]
 
@@ -43,13 +43,13 @@ class CiriEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      editorState: initialState,
+      editorState: initialValue,
     }
   }
 
   componentDidUpdate = () => updateMenuPosition(this.menu, this.state.editorState)
 
-  onChange = ({ state }) => this.setState({ editorState: state })
+  onChange = ({ value }) => this.setState({ editorState: value })
 
   render() {
     const editorState = this.state.editorState
@@ -62,7 +62,7 @@ class CiriEditor extends Component {
         /> : null}
         <Editor
           plugins={plugins}
-          state={editorState}
+          value={editorState}
           onChange={this.onChange}
         />
       </div>
