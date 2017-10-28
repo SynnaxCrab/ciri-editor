@@ -8,7 +8,7 @@ const Button = styled.span`
   + * {
     margin-left: 15px;
   }
-  color: ${props => props.isActive ? 'black' : '#ccc'};
+  color: ${props => props.isActive ? '#fff' : '#aaa'};
   cursor: pointer;
 `
 
