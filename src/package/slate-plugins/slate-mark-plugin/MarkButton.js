@@ -12,7 +12,7 @@ const Button = styled.span`
   cursor: pointer;
 `
 
-const MaterialIcon = ({ children }: Props) => (
+const MaterialIcon = ({ children } ) => (
   <span className='material-icons'>{children}</span>
 )
 

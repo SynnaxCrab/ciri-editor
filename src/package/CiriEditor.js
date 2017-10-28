@@ -3,7 +3,7 @@ import { Value } from 'slate'
 import { Editor } from 'slate-react'
 
 import { MarkPlugin } from './slate-plugins/slate-mark-plugin'
-import { AutoMarkdownPlugin } from './slate-plugins/slate-auto-markdown-plugin'
+import AutoMarkdownPlugin from './slate-plugins/slate-auto-markdown-plugin'
 import HoveringMenu, { updateMenuPosition } from './HoveringMenu'
 
 const initialValue = Value.fromJSON({
