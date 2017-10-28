@@ -1,25 +1,20 @@
-import MarkSchema from './MarkSchema'
-import MarkNode from './MarkNode'
+import renderMark from './MarkRender'
 
 import MarkKeyboardShortcut from './MarkKeyboardShortcut'
 
-import * as MarkUtils from './MarkUtils'
 import MarkButton from './MarkButton'
 
 
 const MarkPlugin = ({ key, type }) => ({
-  schema: MarkSchema(type),
-
   onKeyDown(event, data, change) {
     return MarkKeyboardShortcut(key, type, data, change)
   },
+  renderMark: renderMark,
 })
+
+export default MarkPlugin
 
 export {
   MarkPlugin,
-  MarkSchema,
-  MarkNode,
-  MarkKeyboardShortcut,
-  MarkUtils,
   MarkButton,
 }

@@ -35,7 +35,7 @@ const markPlugins = [
 ].map(x => MarkPlugin(x))
 
 const plugins = [
-  //...markPlugins,
+  ...markPlugins,
   AutoMarkdownPlugin(),
 ]
 
