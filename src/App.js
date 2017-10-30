@@ -6,6 +6,7 @@ import CiriEditor from './package/CiriEditor'
 const Container = styled.div`
   padding: 100px;
   line-height: 2;
+  font-size: 16px;
   width: 42em;
   margin: auto;
 `

@@ -5,6 +5,7 @@ import { Editor } from 'slate-react'
 import { MarkPlugin } from './slate-plugins/slate-mark-plugin'
 import AutoMarkdownPlugin from './slate-plugins/slate-auto-markdown-plugin'
 import HoveringMenu, { updateMenuPosition } from './HoveringMenu'
+import InlineTooltip, { updateInlineTooltipPosition } from './InlineTooltip'
 
 const initialValue = Value.fromJSON({
   document: {
@@ -47,7 +48,10 @@ class CiriEditor extends Component {
     }
   }
 
-  componentDidUpdate = () => updateMenuPosition(this.menu, this.state.editorState)
+  componentDidUpdate = () => {
+    updateMenuPosition(this.menu, this.state.editorState)
+    updateInlineTooltipPosition(this.inlineTooltip, this.state.editorState)
+  }
 
   onChange = ({ value }) => this.setState({ editorState: value })
 
@@ -59,6 +63,9 @@ class CiriEditor extends Component {
           menuRef={el => this.menu = el}
           onChange={this.onChange}
           editorState={editorState}
+        /> : null}
+        {InlineTooltipIsOpened(editorState) ? <InlineTooltip
+          inlineTooltipRef={el => this.inlineTooltip = el}
         /> : null}
         <Editor
           plugins={plugins}
@@ -72,5 +79,10 @@ class CiriEditor extends Component {
 
 // helpers, will be extract out later
 const menuIsOpened = editorState => editorState.isExpanded && editorState.isFocused
+const InlineTooltipIsOpened = editorState => {
+  const { document, startBlock, startText, anchorOffset, isFocused } = editorState
+  const previousBlock = document.getPreviousBlock(startBlock.key)
+  return anchorOffset === 0 && isFocused && previousBlock && startText.text === ''
+}
 
 export default CiriEditor
