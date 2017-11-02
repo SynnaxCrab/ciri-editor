@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import Menu from './Menu'
 import Button from './Button'
@@ -18,6 +18,14 @@ const Tooltip = styled.div`
   z-index: 400;
   visibility: ${props => props.isActive ? 'visible' : 'hidden'};
   opacity: ${props => props.isActive ? 1 : 0};
+`
+
+const PlusButton = Button.extend`
+  transition: transform .2s ease-out;
+
+  ${ props => props.isScaled && css`
+    transform: rotate(45deg);
+  `};
 `
 
 class InlineTooltip extends Component {
@@ -44,12 +52,12 @@ class InlineTooltip extends Component {
         isActive={isActive}
         isScaled={isScaled}
       >
-        <Button 
+        <PlusButton 
           onClick={this.onPlusButtonClick}
           isScaled={isScaled}
         >
           <Icon path={plus} />
-        </Button>
+        </PlusButton>
         <Menu isScaled={isScaled} />
       </Tooltip>
     )
