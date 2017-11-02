@@ -64,9 +64,10 @@ class CiriEditor extends Component {
           onChange={this.onChange}
           editorState={editorState}
         /> : null}
-        {InlineTooltipIsOpened(editorState) ? <InlineTooltip
+        <InlineTooltip
           inlineTooltipRef={el => this.inlineTooltip = el}
-        /> : null}
+          isActive={InlineTooltipIsOpened(editorState)}
+        />
         <Editor
           plugins={plugins}
           value={editorState}
@@ -80,9 +81,12 @@ class CiriEditor extends Component {
 // helpers, will be extract out later
 const menuIsOpened = editorState => editorState.isExpanded && editorState.isFocused
 const InlineTooltipIsOpened = editorState => {
-  const { document, startBlock, startText, anchorOffset, isFocused } = editorState
+  const { document, startBlock, startText, anchorOffset } = editorState
   const previousBlock = document.getPreviousBlock(startBlock.key)
-  return anchorOffset === 0 && isFocused && previousBlock && startText.text === ''
+  return anchorOffset === 0
+         && previousBlock
+         && startText.text === ''
+         && startBlock.type === 'paragraph'
 }
 
 export default CiriEditor
