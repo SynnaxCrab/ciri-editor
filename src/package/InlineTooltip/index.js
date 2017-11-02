@@ -1,42 +1,11 @@
 import React, { Component } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-import Menu from './InlineTooltip/Menu'
+import Menu from './Menu'
+import Button from './Button'
+import Icon from './Icon'
 
-const icons = {
-  plus: 'M20 12h-7V5h-1v7H5v1h7v7h1v-7h7',
-}
-
-const Icon = props => (
-  <svg width="25" height="25" viewBox="0 0 25 25">
-    <path d={icons[props.icon]}></path>
-  </svg>
-)
-
-const IconWrapper = styled.span`
-  position: relative;
-  top: 2px;
-`
-
-const Button = styled.button`
-  cursor: pointer;
-  border: 1px solid;
-  border-radius: 100%;
-  width: 32px;
-  height: 32px;
-  line-height: 30px;
-  padding: 0;
-  background-color: white;
-  transition: transform .2s ease-out;
-
-  ${ props => props.isScaled && css`
-    transform: rotate(45deg);
-  `};
-
-  &:focus {
-    outline:0;
-  }
-`
+const plus = 'M20 12h-7V5h-1v7H5v1h7v7h1v-7h7'
 
 const Tooltip = styled.div`
   position: absolute;
@@ -79,9 +48,7 @@ class InlineTooltip extends Component {
           onClick={this.onPlusButtonClick}
           isScaled={isScaled}
         >
-          <IconWrapper>
-            <Icon icon='plus' />
-          </IconWrapper>
+          <Icon path={plus} />
         </Button>
         <Menu isScaled={isScaled} />
       </Tooltip>
