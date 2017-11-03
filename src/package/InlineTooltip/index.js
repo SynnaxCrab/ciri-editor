@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 import Menu from './Menu'
@@ -28,40 +28,20 @@ const Tooltip = styled.div`
   }
 `
 
-class InlineTooltip extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isScaled: false
-    }
-  }
-
-  onPlusButtonClick = () => {
-    this.setState(prevState => ({
-      isScaled: !prevState.isScaled
-    }))
-  }
-
-  render() {
-    const { inlineTooltipRef, isActive } = this.props
-    const { isScaled } = this.state
-
-    return (
-      <Tooltip
-        innerRef={inlineTooltipRef}
-        isActive={isActive}
-        isScaled={isScaled}
-      >
-        <Button 
-          onClick={this.onPlusButtonClick}
-        >
-          <Icon paths={plus} />
-        </Button>
-        <Menu isScaled={isScaled}/>
-      </Tooltip>
-    )
-  }
-}
+const InlineTooltip = ({ inlineTooltipRef, isActive, isScaled, onPlusButtonClick }) => (
+  <Tooltip
+    innerRef={inlineTooltipRef}
+    isActive={isActive}
+    isScaled={isScaled}
+  >
+    <Button 
+      onClick={onPlusButtonClick}
+    >
+      <Icon paths={plus} />
+    </Button>
+    <Menu isScaled={isScaled}/>
+  </Tooltip>
+)
 
 export const updateInlineTooltipPosition = (inlineTooltip, editorState) => {
   if (!inlineTooltip) return

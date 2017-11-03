@@ -45,18 +45,30 @@ class CiriEditor extends Component {
     super(props)
     this.state = {
       editorState: initialValue,
+      inlineTooltipScaled: false,
     }
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (prevProps, prevState) => {
     updateMenuPosition(this.menu, this.state.editorState)
     updateInlineTooltipPosition(this.inlineTooltip, this.state.editorState)
+
+    const inlineTooltipScaled = prevState.inlineTooltipScaled && InlineTooltipIsOpened(this.state.editorState)
+    if (inlineTooltipScaled !== prevState.inlineTooltipScaled) {
+      this.setState({ inlineTooltipScaled })
+    }
   }
 
   onChange = ({ value }) => this.setState({ editorState: value })
 
+  onPlusButtonClick = () => {
+    this.setState(prevState => ({
+      inlineTooltipScaled: !prevState.inlineTooltipScaled
+    }))
+  }
+
   render() {
-    const editorState = this.state.editorState
+    const { editorState, inlineTooltipScaled } = this.state
     return (
       <div>
         {menuIsOpened(editorState) ? <HoveringMenu
@@ -67,6 +79,8 @@ class CiriEditor extends Component {
         <InlineTooltip
           inlineTooltipRef={el => this.inlineTooltip = el}
           isActive={InlineTooltipIsOpened(editorState)}
+          isScaled={inlineTooltipScaled}
+          onPlusButtonClick={this.onPlusButtonClick}
         />
         <Editor
           plugins={plugins}
