@@ -6,10 +6,12 @@ const Icon = styled.span`
   top: 2px;
 `
 
-export default ({ path }) => (
+export default ({ paths }) => (
   <Icon>
     <svg width="25" height="25" viewBox="0 0 25 25">
-      <path d={path}></path>
+      <g fillRule="evenodd">
+        {paths.map((path, index) => <path key={index} d={path}></path>)}
+      </g>
     </svg>
   </Icon>
 )
