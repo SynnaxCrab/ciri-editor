@@ -18,14 +18,14 @@ const Tooltip = styled.div`
   z-index: 400;
   visibility: ${props => props.isActive ? 'visible' : 'hidden'};
   opacity: ${props => props.isActive ? 1 : 0};
-`
 
-const PlusButton = Button.extend`
-  transition: transform .2s ease-out;
+  > ${Button} {
+    transition: transform .2s ease-out;
 
-  ${ props => props.isScaled && css`
-    transform: rotate(45deg);
-  `};
+    ${ props => props.isScaled && css`
+      transform: rotate(45deg);
+    `};
+  }
 `
 
 class InlineTooltip extends Component {
@@ -52,13 +52,12 @@ class InlineTooltip extends Component {
         isActive={isActive}
         isScaled={isScaled}
       >
-        <PlusButton 
+        <Button 
           onClick={this.onPlusButtonClick}
-          isScaled={isScaled}
         >
           <Icon path={plus} />
-        </PlusButton>
-        <Menu isScaled={isScaled} />
+        </Button>
+        <Menu isScaled={isScaled}/>
       </Tooltip>
     )
   }
