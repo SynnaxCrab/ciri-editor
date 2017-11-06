@@ -3,7 +3,7 @@ import { Value } from 'slate'
 import { Editor } from 'slate-react'
 
 import { MarkPlugin } from './slate-plugins/slate-mark-plugin'
-import AutoMarkdown from './slate-plugins/slate-auto-markdown-plugin'
+import AutoMarkdown from './slate-plugins/slate-auto-markdown'
 import HoveringMenu, { updateMenuPosition } from './HoveringMenu'
 import InlineTooltip, { updateInlineTooltipPosition } from './InlineTooltip'
 
