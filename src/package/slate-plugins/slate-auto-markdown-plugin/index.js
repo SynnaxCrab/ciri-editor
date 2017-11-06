@@ -1,16 +1,44 @@
-import { onSpace, onEnter, onBackspace } from './AutoMarkdownEvents'
+import AutoReplace from 'slate-auto-replace'
+import { onEnter, onBackspace } from './AutoMarkdownEvents'
 import AutoMarkDownRenderNode from './AutoMarkdownRenderNode'
 
-const AutoMarkdownPlugin = () => ({
+const plugin = () => ({
   onKeyDown: (event, change) => {
     switch (event.key) {
-      case ' ': return onSpace(event, change)
-      case 'Backspace': return onBackspace(event, change)
       case 'Enter': return onEnter(event, change)
-      default: return false
+      case 'Backspace': return onBackspace(event, change)
+      default: return
     }
   },
   renderNode: AutoMarkDownRenderNode,
 })
 
-export default AutoMarkdownPlugin
+const AutoMarkdown = () => ({
+  plugins: [
+    AutoReplace({
+      trigger: 'space',
+      before: /^(>)$/,
+      transform: transform => transform.setBlock('block-quote')
+    }),
+    AutoReplace({
+      trigger: 'space',
+      before: /^(\*)$/,
+      transform: transform => transform.setBlock('list-item').wrapBlock('bulleted-list')
+    }),
+    AutoReplace({
+      trigger: 'space',
+      before: /^(#{1,6})$/,
+      transform: (transform, event, matches) => {
+        const [ hashes ] = matches.before
+        const level = hashes.length
+        return transform.setBlock({
+          type: 'heading',
+          data: { level }
+        })
+      }
+    }),
+    plugin(),
+  ]
+})
+
+export default AutoMarkdown
