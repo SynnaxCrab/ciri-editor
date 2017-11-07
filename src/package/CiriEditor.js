@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Value } from 'slate'
 import { Editor } from 'slate-react'
 
-import Marks from './slate-plugins/slate-mark-plugin'
-import AutoMarkdown from './slate-plugins/slate-auto-markdown'
+import Marks from './slate-plugins/marks'
+import AutoMarkdown from './slate-plugins/auto-markdown'
 import HoveringMenu, { updateMenuPosition } from './HoveringMenu'
 import InlineTooltip, { updateInlineTooltipPosition } from './InlineTooltip'
 

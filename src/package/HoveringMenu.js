@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 
-import Marks from './slate-plugins/slate-mark-plugin'
+import Marks from './slate-plugins/marks'
 
 const modalRoot = document.getElementById('modal-root')
 const MarkButton = Marks([]).components.MarkButton

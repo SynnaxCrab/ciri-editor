@@ -18,7 +18,7 @@ const Marks = marks => ({
     ...marks.map(({key, type}) => (
       HotKey({
         key,
-        transform: t => t.toggleMark(type)
+        transform: t => toggleMark(t, type)
       })
     )),
     { renderMark },
