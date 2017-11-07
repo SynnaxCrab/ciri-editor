@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Value } from 'slate'
 import { Editor } from 'slate-react'
 
-import { MarkPlugin } from './slate-plugins/slate-mark-plugin'
+import Marks from './slate-plugins/slate-mark-plugin'
 import AutoMarkdown from './slate-plugins/slate-auto-markdown'
 import HoveringMenu, { updateMenuPosition } from './HoveringMenu'
 import InlineTooltip, { updateInlineTooltipPosition } from './InlineTooltip'
@@ -28,15 +28,15 @@ const initialValue = Value.fromJSON({
   },
 })
 
-const markPlugins = [
-  { key: 'b', type: 'bold' },
-  { key: 'i', type: 'italic' },
-  { key: 'u', type: 'underlined' },
-  { key: 'c', type: 'code' },
-].map(x => MarkPlugin(x))
+const marks = [
+  { key: 'mod+b', type: 'bold' },
+  { key: 'mod+i', type: 'italic' },
+  { key: 'mod+u', type: 'underlined' },
+  { key: 'mod+c', type: 'code' },
+]
 
 const plugins = [
-  ...markPlugins,
+  ...Marks(marks).plugins,
   ...AutoMarkdown().plugins,
 ]
 

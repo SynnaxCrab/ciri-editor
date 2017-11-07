@@ -1,20 +1,28 @@
 import renderMark from './MarkRender'
-
-import MarkKeyboardShortcut from './MarkKeyboardShortcut'
-
 import MarkButton from './MarkButton'
+import { toggleMark, hasMark } from './MarkHelpers'
 
+import HotKey from '../slate-hotkey'
 
-const MarkPlugin = ({ key, type }) => ({
-  onKeyDown(event, data, change) {
-    return MarkKeyboardShortcut(key, type, data, change)
+const Marks = marks => ({
+  helpers: {
+    hasMark,
   },
-  renderMark: renderMark,
+  changes: {
+    toggleMark,
+  },
+  components: {
+    MarkButton,
+  },
+  plugins: [
+    ...marks.map(({key, type}) => (
+      HotKey({
+        key,
+        transform: t => t.toggleMark(type)
+      })
+    )),
+    { renderMark },
+  ],
 })
 
-export default MarkPlugin
-
-export {
-  MarkPlugin,
-  MarkButton,
-}
+export default Marks

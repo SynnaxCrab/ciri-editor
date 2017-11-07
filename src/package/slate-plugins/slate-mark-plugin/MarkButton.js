@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { markStrategy, hasMark } from './MarkUtils'
+import { toggleMark, hasMark } from './MarkHelpers'
 
 const Button = styled.span`
   display: inline-block;
@@ -25,7 +25,7 @@ const MarkButton = ({ type, icon, activeMarks, onChange, change }) => (
   <Button
     onMouseDown={event => {
       event.preventDefault()
-      onChange(markStrategy(type, change))
+      onChange(toggleMark(type, change))
     }}
     isActive={hasMark(type, activeMarks)}
   >
