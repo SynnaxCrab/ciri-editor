@@ -2,10 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 
-import Marks from './slate-plugins/marks'
+import { MarkButton } from './slate-plugins/marks'
 
 const modalRoot = document.getElementById('modal-root')
-const MarkButton = Marks([]).components.MarkButton
 
 const Menu = styled.div`
   padding: 8px 7px 6px;

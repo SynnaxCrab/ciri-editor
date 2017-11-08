@@ -11,9 +11,6 @@ const Marks = marks => ({
   changes: {
     toggleMark,
   },
-  components: {
-    MarkButton,
-  },
   plugins: [
     ...marks.map(({key, type}) => (
       HotKey({
@@ -26,3 +23,4 @@ const Marks = marks => ({
 })
 
 export default Marks
+export { MarkButton }
