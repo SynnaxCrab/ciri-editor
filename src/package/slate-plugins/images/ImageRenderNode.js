@@ -1,5 +1,4 @@
 import React from 'react'
-import { watch } from 'fs';
 
 const renderNode = ({ node, attributes }) => {
   switch (node.type) {
