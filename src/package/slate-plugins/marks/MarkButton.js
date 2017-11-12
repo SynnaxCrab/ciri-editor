@@ -25,7 +25,7 @@ const MarkButton = ({ type, icon, activeMarks, onChange, change }) => (
   <Button
     onMouseDown={event => {
       event.preventDefault()
-      onChange(toggleMark(type, change))
+      onChange(toggleMark(change, type))
     }}
     isActive={hasMark(type, activeMarks)}
   >
