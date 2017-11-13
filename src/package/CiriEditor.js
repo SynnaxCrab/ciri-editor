@@ -3,6 +3,7 @@ import { Value } from 'slate'
 import { Editor } from 'slate-react'
 
 import Marks from './slate-plugins/marks'
+import Image from './slate-plugins/images'
 import AutoMarkdown from './slate-plugins/auto-markdown'
 import HoveringMenu, { updateMenuPosition } from './HoveringMenu'
 import InlineTooltip, { updateInlineTooltipPosition } from './InlineTooltip'
@@ -38,6 +39,7 @@ const marks = [
 const plugins = [
   ...Marks(marks).plugins,
   ...AutoMarkdown().plugins,
+  Image(),
 ]
 
 class CiriEditor extends Component {
