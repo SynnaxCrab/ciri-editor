@@ -1,4 +1,4 @@
-import { Block } from 'slate-react'
+import { Block } from 'slate'
 import renderNode from './ImageRenderNode'
 import { onDropOrPaste } from './ImageEvents'
 
@@ -21,6 +21,7 @@ const Image = () => ({
   schema: schema,
   onDrop: onDropOrPaste,
   onPaste: onDropOrPaste,
+  renderNode: renderNode,
 })
 
 export default Image
