@@ -1,7 +1,6 @@
 import { getEventRange, getEventTransfer } from 'slate-react'
 import isUrl from 'is-url'
-import isImage from 'is-image'
-import { insertImage } from './ImageHelpers'
+import { isImage, insertImage } from './ImageHelpers'
 
 export const onDropOrPaste = (event, change, editor) => {
   const target = getEventRange(event, change.value)
