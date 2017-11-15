@@ -13,7 +13,7 @@ export const insertImage = (change, src, target) => {
   })
 }
 
-export const isImage = (path) => {
+export const isImage = (filepath) => {
   const exts = new Set(imageExtensions)
-  return exts.has(path.extname(path).slice(1).toLowerCase())
+  return exts.has(path.extname(filepath).slice(1).toLowerCase())
 }
