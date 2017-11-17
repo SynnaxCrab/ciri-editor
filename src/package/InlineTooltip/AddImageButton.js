@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from './Button'
 import Icon from './Icon'
+import Image from '../slate-plugins/image'
 
 const AddImageButton = ({ onChange, change }) => {
   let fileInputRef = null
@@ -17,8 +18,8 @@ const AddImageButton = ({ onChange, change }) => {
   function handleFileUpload(event) {
     const files = event.target.files
     const reader = new FileReader()
-    reader.onload = () => {
-      change.focus().selectAll().delete()
+    reader.onload = (e) => {
+      change.call(Image().helpers.insertImage, e.target.result)
       onChange(change)
     }
     reader.readAsDataURL(files[0])
