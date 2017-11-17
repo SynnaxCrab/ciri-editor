@@ -1,6 +1,7 @@
 import { Block } from 'slate'
 import renderNode from './ImageRenderNode'
 import { onDropOrPaste } from './ImageEvents'
+import { insertImage } from './ImageHelpers'
 
 const schema = {
   document: {
@@ -17,11 +18,20 @@ const schema = {
   }
 }
 
-const Image = () => ({
+const ImagePlugin = () => ({
   schema: schema,
   onDrop: onDropOrPaste,
   onPaste: onDropOrPaste,
   renderNode: renderNode,
+})
+
+const Image = () => ({
+  plugins: [
+    ImagePlugin(),
+  ],
+  helpers: {
+    insertImage,
+  },
 })
 
 export default Image

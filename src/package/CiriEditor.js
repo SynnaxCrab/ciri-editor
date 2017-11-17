@@ -39,7 +39,7 @@ const marks = [
 const plugins = [
   ...Marks(marks).plugins,
   ...AutoMarkdown().plugins,
-  Image(),
+  ...Image().plugins,
 ]
 
 class CiriEditor extends Component {
