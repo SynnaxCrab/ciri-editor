@@ -18,8 +18,6 @@ const AddImageButton = ({ onChange, change }) => {
     const files = event.target.files
     const reader = new FileReader()
     reader.onload = () => {
-      console.log("loaded!")
-      console.log(change)
       change.focus().selectAll().delete()
       onChange(change)
     }
