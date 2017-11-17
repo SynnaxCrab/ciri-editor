@@ -17,18 +17,21 @@ const AddImageButton = ({ onChange, change }) => {
 
   function handleFileUpload(event) {
     const files = event.target.files
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      change.call(Image().helpers.insertImage, e.target.result)
-      onChange(change)
+    for (const file of files ) {
+      const reader = new FileReader()
+      reader.onload = e => {
+        change.call(Image().helpers.insertImage, e.target.result)
+        onChange(change)
+      }
+      reader.readAsDataURL(file)
     }
-    reader.readAsDataURL(files[0])
   }
 
   return (
     <div>
       <input
         type='file'
+        multiple
         onChange={handleFileUpload}
         ref={input => fileInputRef = input}
         style={{ display: 'none' }}
