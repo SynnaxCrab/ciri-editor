@@ -28,7 +28,7 @@ const Tooltip = styled.div`
   }
 `
 
-const InlineTooltip = ({ inlineTooltipRef, isActive, isScaled, onPlusButtonClick, change }) => (
+const InlineTooltip = ({ inlineTooltipRef, isActive, isScaled, onPlusButtonClick, onChange, change }) => (
   <Tooltip
     innerRef={inlineTooltipRef}
     isActive={isActive}
@@ -41,6 +41,7 @@ const InlineTooltip = ({ inlineTooltipRef, isActive, isScaled, onPlusButtonClick
     </Button>
     <Menu
       isScaled={isScaled}
+      onChange={onChange}
       change={change}
     />
   </Tooltip>

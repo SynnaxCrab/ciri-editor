@@ -13,8 +13,10 @@ const Menu = styled.div`
   transition-duration: ${props => props.isScaled ? 0.2 : 0}s;
 `
 
-export default ({ isScaled, change }) => (
+export default ({ isScaled, change, onChange }) => (
   <Menu isScaled={isScaled}>
-    <AddImageButton change={change} />
+    <AddImageButton
+      onChange={onChange}
+      change={change} />
   </Menu>
 )

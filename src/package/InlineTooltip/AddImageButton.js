@@ -1,13 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 import Button from './Button'
 import Icon from './Icon'
 
-const FileInput = styled.input`
-  display: none;
-`
-
-const AddImageButton = ({ change }) => {
+const AddImageButton = ({ onChange, change }) => {
   let fileInputRef = null
 
   const svg = [
@@ -19,15 +14,25 @@ const AddImageButton = ({ change }) => {
     fileInputRef.click()
   }
 
-  function onChange() {
+  function handleFileUpload(event) {
+    const files = event.target.files
+    const reader = new FileReader()
+    reader.onload = () => {
+      console.log("loaded!")
+      console.log(change)
+      change.focus().selectAll().delete()
+      onChange(change)
+    }
+    reader.readAsDataURL(files[0])
   }
 
   return (
     <div>
-      <FileInput
+      <input
         type='file'
-        onChange={onChange}
-        innerRef={input => fileInputRef = input}
+        onChange={handleFileUpload}
+        ref={input => fileInputRef = input}
+        style={{ display: 'none' }}
       />
       <Button onClick={onClick}>
         <Icon paths={svg}/>
