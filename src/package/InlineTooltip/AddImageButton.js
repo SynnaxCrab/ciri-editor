@@ -7,7 +7,7 @@ const FileInput = styled.input`
   display: none;
 `
 
-const AddImageButton = () => {
+const AddImageButton = ({ change }) => {
   let fileInputRef = null
 
   const svg = [
@@ -19,10 +19,14 @@ const AddImageButton = () => {
     fileInputRef.click()
   }
 
+  function onChange() {
+  }
+
   return (
     <div>
       <FileInput
         type='file'
+        onChange={onChange}
         innerRef={input => fileInputRef = input}
       />
       <Button onClick={onClick}>

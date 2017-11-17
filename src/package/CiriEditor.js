@@ -83,6 +83,7 @@ class CiriEditor extends Component {
           isActive={InlineTooltipIsOpened(editorState)}
           isScaled={inlineTooltipScaled}
           onPlusButtonClick={this.onPlusButtonClick}
+          change={editorState.change()}
         />
         <Editor
           plugins={plugins}
