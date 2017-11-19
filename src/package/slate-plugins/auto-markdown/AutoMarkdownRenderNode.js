@@ -7,6 +7,7 @@ const renderNode = props => {
     case 'block-quote': return <blockquote {...attributes}>{children}</blockquote>
     case 'bulleted-list': return <ul {...attributes}>{children}</ul>
     case 'list-item': return <li {...attributes}>{children}</li>
+    case 'hr': return <hr />
     case 'heading': 
       const level = node.data.get('level')
       const Tag = `h${level}`

@@ -37,6 +37,16 @@ const AutoMarkdown = () => ({
         })
       }
     }),
+    AutoReplace({
+      trigger: 'enter',
+      before: /^(-{3})$/,
+      transform: transform => {
+        return transform.setBlock({
+          type: 'hr',
+          isVoid: true
+        })
+      }
+    }),
     plugin(),
   ]
 })
