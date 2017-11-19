@@ -28,7 +28,7 @@ const AddImageButton = ({ onChange, change }) => {
   }
 
   return (
-    <div>
+    <Button onClick={onClick}>
       <input
         type='file'
         multiple
@@ -36,10 +36,8 @@ const AddImageButton = ({ onChange, change }) => {
         ref={input => fileInputRef = input}
         style={{ display: 'none' }}
       />
-      <Button onClick={onClick}>
-        <Icon paths={svg}/>
-      </Button>
-    </div>
+      <Icon paths={svg}/>
+    </Button>
   )
 }
 

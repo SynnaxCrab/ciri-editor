@@ -8,6 +8,7 @@ const Button = styled.button`
   height: 32px;
   line-height: 30px;
   padding: 0;
+  margin-right: 15px;
   background-color: white;
 
   &:focus {
