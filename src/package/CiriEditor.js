@@ -5,6 +5,7 @@ import { Editor } from 'slate-react'
 import Marks from './slate-plugins/marks'
 import Image from './slate-plugins/image'
 import Video from './slate-plugins/video'
+import Link from './slate-plugins/link'
 import AutoMarkdown from './slate-plugins/auto-markdown'
 import HoveringMenu, { updateMenuPosition } from './HoveringMenu'
 import InlineTooltip, { updateInlineTooltipPosition } from './InlineTooltip'
@@ -42,6 +43,7 @@ const plugins = [
   ...AutoMarkdown().plugins,
   ...Image().plugins,
   ...Video().plugins,
+  Link(),
 ]
 
 class CiriEditor extends Component {
