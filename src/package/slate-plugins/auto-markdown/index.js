@@ -5,9 +5,12 @@ import AutoMarkDownRenderNode from './AutoMarkdownRenderNode'
 const plugin = () => ({
   onKeyDown: (event, change) => {
     switch (event.key) {
-      case 'Enter': return onEnter(event, change)
-      case 'Backspace': return onBackspace(event, change)
-      default: return
+      case 'Enter':
+        return onEnter(event, change)
+      case 'Backspace':
+        return onBackspace(event, change)
+      default:
+        return
     }
   },
   renderNode: AutoMarkDownRenderNode,
@@ -18,37 +21,38 @@ const AutoMarkdown = () => ({
     AutoReplace({
       trigger: 'space',
       before: /^(>)$/,
-      transform: transform => transform.setBlock('block-quote')
+      change: change => change.setBlocks({ type: 'block-quote' }),
     }),
     AutoReplace({
       trigger: 'space',
       before: /^(\*)$/,
-      transform: transform => transform.setBlock('list-item').wrapBlock('bulleted-list')
+      change: change =>
+        change.setBlocks({ type: 'list-item' }).wrapBlock('bulleted-list'),
     }),
     AutoReplace({
       trigger: 'space',
       before: /^(#{1,6})$/,
-      transform: (transform, event, matches) => {
-        const [ hashes ] = matches.before
+      change: (change, event, matches) => {
+        const [hashes] = matches.before
         const level = hashes.length
-        return transform.setBlock({
+        return change.setBlocks({
           type: 'heading',
-          data: { level }
+          data: { level },
         })
-      }
+      },
     }),
     AutoReplace({
       trigger: 'enter',
       before: /^(-{3})$/,
-      transform: transform => {
-        return transform.setBlock({
+      change: change => {
+        return change.setBlocks({
           type: 'hr',
-          isVoid: true
+          isVoid: true,
         })
-      }
+      },
     }),
     plugin(),
-  ]
+  ],
 })
 
 export default AutoMarkdown

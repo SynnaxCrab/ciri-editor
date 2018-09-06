@@ -14,11 +14,11 @@ const initialValue = Value.fromJSON({
   document: {
     nodes: [
       {
-        kind: 'block',
+        object: 'block',
         type: 'paragraph',
         nodes: [
           {
-            kind: 'text',
+            object: 'text',
             leaves: [
               {
                 text: 'A line of text in a paragraph.',
@@ -59,7 +59,9 @@ class CiriEditor extends Component {
     updateMenuPosition(this.menu, this.state.editorState)
     updateInlineTooltipPosition(this.inlineTooltip, this.state.editorState)
 
-    const inlineTooltipScaled = prevState.inlineTooltipScaled && InlineTooltipIsOpened(this.state.editorState)
+    const inlineTooltipScaled =
+      prevState.inlineTooltipScaled &&
+      InlineTooltipIsOpened(this.state.editorState)
     if (inlineTooltipScaled !== prevState.inlineTooltipScaled) {
       this.setState({ inlineTooltipScaled })
     }
@@ -69,7 +71,7 @@ class CiriEditor extends Component {
 
   onPlusButtonClick = () => {
     this.setState(prevState => ({
-      inlineTooltipScaled: !prevState.inlineTooltipScaled
+      inlineTooltipScaled: !prevState.inlineTooltipScaled,
     }))
   }
 
@@ -77,13 +79,15 @@ class CiriEditor extends Component {
     const { editorState, inlineTooltipScaled } = this.state
     return (
       <div>
-        {menuIsOpened(editorState) ? <HoveringMenu
-          menuRef={el => this.menu = el}
-          onChange={this.onChange}
-          editorState={editorState}
-        /> : null}
+        {menuIsOpened(editorState) ? (
+          <HoveringMenu
+            menuRef={el => (this.menu = el)}
+            onChange={this.onChange}
+            editorState={editorState}
+          />
+        ) : null}
         <InlineTooltip
-          inlineTooltipRef={el => this.inlineTooltip = el}
+          inlineTooltipRef={el => (this.inlineTooltip = el)}
           isActive={InlineTooltipIsOpened(editorState)}
           isScaled={inlineTooltipScaled}
           onPlusButtonClick={this.onPlusButtonClick}
@@ -101,14 +105,17 @@ class CiriEditor extends Component {
 }
 
 // helpers, will be extract out later
-const menuIsOpened = editorState => editorState.isExpanded && editorState.isFocused
+const menuIsOpened = editorState =>
+  editorState.selection.isExpanded && editorState.selection.isFocused
 const InlineTooltipIsOpened = editorState => {
-  const { document, startBlock, startText, anchorOffset } = editorState
+  const { document, startBlock, startText, selection } = editorState
   const previousBlock = document.getPreviousBlock(startBlock.key)
-  return anchorOffset === 0
-         && previousBlock
-         && startText.text === ''
-         && startBlock.type === 'paragraph'
+  return (
+    selection.anchor.offset === 0 &&
+    previousBlock &&
+    startText.text === '' &&
+    startBlock.type === 'paragraph'
+  )
 }
 
 export default CiriEditor

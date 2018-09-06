@@ -5,17 +5,18 @@ import { insertImage } from './ImageHelpers'
 
 const schema = {
   document: {
-    last: { types: ['paragraph'] },
-    normalize: (change, reason, { node, child }) => {
-      switch (reason) {
+    last: { type: 'paragraph' },
+    normalize: (change, { code, node, child }) => {
+      switch (code) {
         case 'last_child_type_invalid': {
           const paragraph = Block.create('paragraph')
           return change.insertNodeByKey(node.key, node.nodes.size, paragraph)
         }
-        default: return
+        default:
+          return
       }
-    }
-  }
+    },
+  },
 }
 
 const ImagePlugin = () => ({
@@ -26,9 +27,7 @@ const ImagePlugin = () => ({
 })
 
 const Image = () => ({
-  plugins: [
-    ImagePlugin(),
-  ],
+  plugins: [ImagePlugin()],
   helpers: {
     insertImage,
   },
