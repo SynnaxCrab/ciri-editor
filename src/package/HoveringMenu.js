@@ -20,18 +20,22 @@ const Menu = styled.div`
 export const updateMenuPosition = (menu, editorState) => {
   if (!menu) return
 
-  if (editorState.isBlurred || editorState.isEmpty) {
+  const { fragment, selection } = editorState
+  if (selection.isBlurred || selection.isCollapsed || fragment.text === '') {
     menu.removeAttribute('style')
     return
   }
 
-  const selection = window.getSelection()
-  const range = selection.getRangeAt(0)
+  const nativeSelection = window.getSelection()
+  const range = nativeSelection.getRangeAt(0)
   const rect = range.getBoundingClientRect()
 
   menu.style.opacity = 1
   menu.style.top = `${rect.top + window.scrollY - menu.offsetHeight}px`
-  menu.style.left = `${rect.left + window.scrollX - menu.offsetWidth / 2 + rect.width / 2}px`
+  menu.style.left = `${rect.left +
+    window.scrollX -
+    menu.offsetWidth / 2 +
+    rect.width / 2}px`
 }
 
 const HoveringMenu = ({ menuRef, onChange, editorState }) => {
@@ -42,22 +46,20 @@ const HoveringMenu = ({ menuRef, onChange, editorState }) => {
     { icon: 'code', type: 'code' },
   ]
 
-  return (
-    ReactDOM.createPortal(
-      <Menu innerRef={menuRef}>
-        {menus.map(menu => (
-          <MarkButton
-            key={menu.type}
-            icon={menu.icon}
-            type={menu.type}
-            activeMarks={editorState.activeMarks}
-            onChange={onChange}
-            change={editorState.change()}
-          />),
-        )}
-      </Menu>,
-      modalRoot
-    )
+  return ReactDOM.createPortal(
+    <Menu innerRef={menuRef}>
+      {menus.map(menu => (
+        <MarkButton
+          key={menu.type}
+          icon={menu.icon}
+          type={menu.type}
+          activeMarks={editorState.activeMarks}
+          onChange={onChange}
+          change={editorState.change()}
+        />
+      ))}
+    </Menu>,
+    modalRoot,
   )
 }
 
