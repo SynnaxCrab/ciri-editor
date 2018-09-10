@@ -7,7 +7,7 @@ export const onBackspace = (event, change) => {
   if (startBlock.type === 'paragraph') return
 
   event.preventDefault()
-  change.setBlock('paragraph')
+  change.setBlocks('paragraph')
 
   if (startBlock.type === 'list-item') {
     change.unwrapBlock('bulleted-list')
