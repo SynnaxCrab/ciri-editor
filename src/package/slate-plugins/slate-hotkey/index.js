@@ -2,27 +2,28 @@ import isHotKey from 'is-hotkey'
 
 /**
  * A Slate plugin for keyboard hot key support.
- * 
+ *
  * @param {Object} opts
  * @return {Object}
  */
 
-const HotKey = ({ transform, key }) => {
+const HotKey = ({ command, key }) => {
   const trigger = isHotKey(key)
 
   /**
    * on key down.
-   * 
+   *
    * @param {Event} event
    * @param {Change} change
    * @param {Editor} editor
    * @return {Value}
    */
 
-  function onKeyDown(event, change, editor) {
-    if (trigger(event)) {
-      return change.call(transform, event, editor)
-    }
+  function onKeyDown(event, editor, next) {
+    if (!trigger(event)) return next()
+
+    event.preventDefault()
+    editor.command(command)
   }
 
   return { onKeyDown }
@@ -30,7 +31,7 @@ const HotKey = ({ transform, key }) => {
 
 /**
  * Export
- * 
+ *
  * @type {Function}
  */
 
