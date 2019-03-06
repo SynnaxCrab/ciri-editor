@@ -3,6 +3,7 @@ import { Value } from 'slate'
 import { Editor } from 'slate-react'
 
 import Marks from './slate-plugins/marks'
+import Markdown from './slate-plugins/markdown'
 
 const initialValue = Value.fromJSON({
   document: {
@@ -32,7 +33,7 @@ const marks = [
   { key: 'mod+c', type: 'code' },
 ]
 
-const plugins = [...Marks(marks)]
+const plugins = [...Marks(marks), ...Markdown()]
 
 const CiriEditor = () => {
   const [value, setValue] = useState(initialValue)
