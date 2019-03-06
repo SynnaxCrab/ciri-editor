@@ -10,16 +10,16 @@
     "is-hotkey": "^0.1.1",
     "is-url": "^1.2.2",
     "prettier": "^1.14.2",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "slate": "^0.44.10",
     "slate-auto-replace": "^0.12.1",
     "slate-react": "^0.21.16",
     "styled-components": "^3.4.5"
   },
   "devDependencies": {
-    "flow-bin": "^0.82.0",
-    "react-scripts": "2.0.4"
+    "flow-bin": "^0.94.0",
+    "react-scripts": "2.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
