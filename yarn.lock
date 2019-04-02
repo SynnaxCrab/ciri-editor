@@ -8903,17 +8903,18 @@ slate-react@^0.18.0:
     slate-plain-serializer "^0.6.2"
     slate-prop-types "^0.4.61"
 
-slate@^0.41.2:
-  version "0.41.2"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.41.2.tgz#860806de87cec0d8446f61be423e3c20e3f2db51"
-  integrity sha512-vjvuV4GC8E/a6x5sMXxXkdrtPg4Oz4h6CTXyo+kgcQ4dZKSPXvfzWQ0MfqCb6Ut3ziIcQCePuZTk6jNmhXDybg==
+slate@^0.44.13:
+  version "0.44.13"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.44.13.tgz#9c87d0769fd7bacc3ce649f4e3c9fd3a2e705245"
+  integrity sha512-GcDon/8iN6Mmonl7FucSDGs9KYDB7S9gs+fnnJDny5HFsHGGDTDwfBnRXMyKDC307sRZ+yhauqKSulHkoBdB9A==
   dependencies:
     debug "^3.1.0"
     direction "^0.1.5"
     esrever "^0.2.0"
     is-plain-object "^2.0.4"
     lodash "^4.17.4"
-    slate-dev-warning "^0.0.1"
+    tiny-invariant "^1.0.1"
+    tiny-warning "^0.0.3"
     type-of "^2.0.1"
 
 slice-ansi@1.0.0:
@@ -9467,6 +9468,16 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tiny-invariant@^1.0.1:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.0.4.tgz#346b5415fd93cb696b0c4e8a96697ff590f92463"
+  integrity sha512-lMhRd/djQJ3MoaHEBrw8e2/uM4rs9YMNk0iOr8rHQ0QdbM7D4l0gFl3szKdeixrlyfm9Zqi4dxHCM2qVG8ND5g==
+
+tiny-warning@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-0.0.3.tgz#1807eb4c5f81784a6354d58ea1d5024f18c6c81f"
+  integrity sha512-r0SSA5Y5IWERF9Xh++tFPx0jITBgGggOsRLDWWew6YRw/C2dr4uNO1fw1vanrBmHsICmPyMLNBZboTlxUmUuaA==
 
 tmp@^0.0.33:
   version "0.0.33"
