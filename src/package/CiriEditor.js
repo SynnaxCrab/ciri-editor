@@ -1,14 +1,9 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Value } from 'slate'
 import { Editor } from 'slate-react'
 
 import Marks from './slate-plugins/marks'
-import Image from './slate-plugins/image'
-import Video from './slate-plugins/video'
-import Link from './slate-plugins/link'
-import AutoMarkdown from './slate-plugins/auto-markdown'
-import HoveringMenu, { updateMenuPosition } from './HoveringMenu'
-import InlineTooltip, { updateInlineTooltipPosition } from './InlineTooltip'
+import Markdown from './slate-plugins/markdown'
 
 const initialValue = Value.fromJSON({
   document: {
@@ -38,83 +33,35 @@ const marks = [
   { key: 'mod+c', type: 'code' },
 ]
 
-const plugins = [
-  ...Marks(marks).plugins,
-  ...AutoMarkdown().plugins,
-  ...Image().plugins,
-  ...Video().plugins,
-  Link(),
-]
+const plugins = [...Marks(marks), ...Markdown()]
 
-class CiriEditor extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      editorState: initialValue,
-      inlineTooltipScaled: false,
+const CiriEditor = () => {
+  const [value, setValue] = useState(initialValue)
+
+  const onChange = ({ value }) => setValue(value)
+
+  const onKeyDown = (event, editor, next) => {
+    if (!event.ctrlKey) return next()
+
+    switch (event.key) {
+      case '`': {
+        event.preventDefault()
+        const isCode = editor.value.blocks.some(block => block.type === 'code')
+        editor.setBlocks(isCode ? 'paragraph' : 'code')
+        break
+      }
+      default:
+        return next()
     }
   }
 
-  componentDidUpdate = (prevProps, prevState) => {
-    updateMenuPosition(this.menu, this.state.editorState)
-    updateInlineTooltipPosition(this.inlineTooltip, this.state.editorState)
-
-    const inlineTooltipScaled =
-      prevState.inlineTooltipScaled &&
-      InlineTooltipIsOpened(this.state.editorState)
-    if (inlineTooltipScaled !== prevState.inlineTooltipScaled) {
-      this.setState({ inlineTooltipScaled })
-    }
-  }
-
-  onChange = ({ value }) => this.setState({ editorState: value })
-
-  onPlusButtonClick = () => {
-    this.setState(prevState => ({
-      inlineTooltipScaled: !prevState.inlineTooltipScaled,
-    }))
-  }
-
-  render() {
-    const { editorState, inlineTooltipScaled } = this.state
-    return (
-      <div>
-        {menuIsOpened(editorState) ? (
-          <HoveringMenu
-            menuRef={el => (this.menu = el)}
-            onChange={this.onChange}
-            editorState={editorState}
-          />
-        ) : null}
-        <InlineTooltip
-          inlineTooltipRef={el => (this.inlineTooltip = el)}
-          isActive={InlineTooltipIsOpened(editorState)}
-          isScaled={inlineTooltipScaled}
-          onPlusButtonClick={this.onPlusButtonClick}
-          onChange={this.onChange}
-          change={editorState.change()}
-        />
-        <Editor
-          plugins={plugins}
-          value={editorState}
-          onChange={this.onChange}
-        />
-      </div>
-    )
-  }
-}
-
-// helpers, will be extract out later
-const menuIsOpened = editorState =>
-  editorState.selection.isExpanded && editorState.selection.isFocused
-const InlineTooltipIsOpened = editorState => {
-  const { document, startBlock, startText, selection } = editorState
-  const previousBlock = document.getPreviousBlock(startBlock.key)
   return (
-    selection.anchor.offset === 0 &&
-    previousBlock &&
-    startText.text === '' &&
-    startBlock.type === 'paragraph'
+    <Editor
+      plugins={plugins}
+      value={value}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+    />
   )
 }
 

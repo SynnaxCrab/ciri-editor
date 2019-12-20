@@ -1,23 +1,25 @@
 {
-  "name": "ciri-editor",
+  "name": "@memorsa/editor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.7",
+    "@emotion/styled": "^10.0.7",
     "image-extensions": "^1.1.0",
     "immutable": "^3.8.2",
     "is-hotkey": "^0.1.1",
     "is-url": "^1.2.2",
     "prettier": "^1.14.2",
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
-    "slate": "^0.41.2",
-    "slate-auto-replace": "^0.11.2",
-    "slate-react": "^0.18.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "slate": "^0.46.1",
+    "slate-auto-replace": "^0.12.1",
+    "slate-react": "^0.21.24",
     "styled-components": "^3.4.5"
   },
   "devDependencies": {
-    "flow-bin": "^0.82.0",
-    "react-scripts": "2.0.4"
+    "flow-bin": "^0.114.0",
+    "react-scripts": "3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
